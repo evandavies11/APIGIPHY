@@ -12,20 +12,34 @@
 </head>
 
 <body>
-    <h1>Get those GIFS</h1>
+    <div class="container">
+        <h1>Movie Search</h1>
 
-    <button data-person="Taylor Swift">
-        If you're horrible to me, I'm going to write a song about it,
-        and you won't like it. That's how I operate.
-    </button>
+        <!-- Movies will get dumped here -->
+        <div id="buttons-view"></div>
 
-    <div id="gifs-appear-here"></div>
+        <form id="movie-form">
+            <label for="movie-input"> What is Your favorite Movie</label>
+            <input type="text" id="movie-input"><br>
+
+            <!-- Button triggers new movie to be added -->
+            <input id="add-movie" type="submit" value="Search">
+        </form>
+
+        <button data-person="jaws">
+            Far better is it to dare mighty things, to win glorious triumphs,
+            even though checkered by failure... than to rank with those poor spirits who
+            neither enjoy nor suffer much, because they live in a gray twilight that
+            knows not victory nor defeat.
+        </button>
+
+        <div id="gifs-appear-here"></div>
 
 
 
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="javascript/app.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="javascript/app.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>

@@ -2,11 +2,11 @@ console.log("hello world")
 
 $("button").on("click", function () {
     // In this case, the "this" keyword refers to the button that was clicked
-    var person = $(this).attr("data-person");
+    var movie = $(this).attr("data-person");
 
     // Constructing a URL to search Giphy for the name of the person who said the quote
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+        movie + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
     // Performing our AJAX GET request
     $.ajax({
@@ -17,6 +17,7 @@ $("button").on("click", function () {
         .then(function (response) {
             // Storing an array of results in the results variable
             var results = response.data;
+            console.log(response);
 
             // Looping over every result item
             for (var i = 0; i < results.length; i++) {
