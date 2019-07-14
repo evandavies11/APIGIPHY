@@ -1,6 +1,6 @@
 console.log("hello world")
 
-var movieArray = ["Independence Day", "Mandy", "Star Trek", "28 Days Later"];
+var movieArray = ["Independence Day", "Mandy", "Star Trek", "28 Days Later"]
 
 $("button").on("click", function () {
     // In this case, the "this" keyword refers to the button that was clicked
@@ -45,6 +45,7 @@ $("button").on("click", function () {
                     // Appending the paragraph and personImage we created to the "gifDiv" div we created
                     gifDiv.append(p);
                     gifDiv.append(movieImage);
+                    gifDiv.attr("data-movie");
 
 
                     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
@@ -70,7 +71,7 @@ function renderButtons() {
         // Adding a class
         a.addClass("movie-btn");
         // Adding a data-attribute with a value of the movie at index i
-        a.attr("data-name", movieArray[i]);
+        a.attr("data-movie", movieArray[i]);
         // Providing the button's text with a value of the movie at index i
         a.text(movieArray[i]);
         // Adding the button to the HTML
@@ -97,6 +98,7 @@ $(document).on("click", ".movie-btn", displayMovieInfo);
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
 
+// reminder to get stop start function working at some point
 $(".gif").on("click", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
     var state = $(this).attr("data-state");
