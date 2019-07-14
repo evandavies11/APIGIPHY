@@ -1,6 +1,6 @@
 console.log("hello world")
 
-var movieArray = ["Independence Day", "Mandy", "Star Trek", "28 Days Later"]
+var movieArray = ["Independence Day", "Mandy", "Star Trek", "28 Days Later"];
 
 $("button").on("click", function () {
     // In this case, the "this" keyword refers to the button that was clicked
@@ -22,7 +22,7 @@ $("button").on("click", function () {
             console.log(response);
 
             // Looping over every result item
-            for (var i = 0; i < results.movieArray.length; i++) {
+            for (var i = 0; i < results.length; i++) {
 
                 // Only taking action if the photo has an appropriate rating
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
@@ -45,34 +45,13 @@ $("button").on("click", function () {
                     // Appending the paragraph and personImage we created to the "gifDiv" div we created
                     gifDiv.append(p);
                     gifDiv.append(movieImage);
-                    gifDiv.text(movieArray[i]);
+
 
                     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
                     $("#gifs-appear-here").prepend(gifDiv);
                 }
             }
-            function renderButtons() {
 
-                // Deleting the movie buttons prior to adding new movie buttons
-                // (this is necessary otherwise we will have repeat buttons)
-                $("#buttons-view").empty();
-
-                // Looping through the array of movies
-                for (var i = 0; i < movies.length; i++) {
-
-                    // Then dynamicaly generating buttons for each movie in the array.
-                    // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
-                    var a = $("<button>");
-                    // Adding a class
-                    a.addClass("movie");
-                    // Adding a data-attribute with a value of the movie at index i
-                    a.attr("data-name", movieArray[i]);
-                    // Providing the button's text with a value of the movie at index i
-                    a.text(movieArray[i]);
-                    // Adding the button to the HTML
-                    $("#buttons-view").append(a);
-                }
-            }
         });
 });
 
@@ -89,7 +68,7 @@ function renderButtons() {
         // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
         var a = $("<button>");
         // Adding a class
-        a.addClass("movie");
+        a.addClass("movie-btn");
         // Adding a data-attribute with a value of the movie at index i
         a.attr("data-name", movieArray[i]);
         // Providing the button's text with a value of the movie at index i
@@ -98,6 +77,25 @@ function renderButtons() {
         $("#buttons-view").append(a);
     }
 }
+
+// This function handles events where a movie button is clicked
+$("#add-movie").on("click", function (event) {
+    event.preventDefault();
+    // This line grabs the input from the textbox
+    var movie = $("#movie-input").val().trim();
+
+    // Adding movie from the textbox to our array
+    movieArray.push(movie);
+
+    // Calling renderButtons which handles the processing of our movie array
+    renderButtons();
+});
+
+// Adding a click event listener to all elements with a class of "movie-btn"
+$(document).on("click", ".movie-btn", displayMovieInfo);
+
+// Calling the renderButtons function to display the intial buttons
+renderButtons();
 
 $(".gif").on("click", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
