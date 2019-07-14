@@ -1,8 +1,10 @@
 console.log("hello world")
 
+var movieArray = ["Independence Day", "Mandy", "Star Trek", "28 Days Later"]
+
 $("button").on("click", function () {
     // In this case, the "this" keyword refers to the button that was clicked
-    var movie = $(this).attr("data-person");
+    var movie = $(this).attr("data-movie");
 
     // Constructing a URL to search Giphy for the name of the person who said the quote
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -20,7 +22,7 @@ $("button").on("click", function () {
             console.log(response);
 
             // Looping over every result item
-            for (var i = 0; i < results.length; i++) {
+            for (var i = 0; i < results.movieArray.length; i++) {
 
                 // Only taking action if the photo has an appropriate rating
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
@@ -34,22 +36,68 @@ $("button").on("click", function () {
                     var p = $("<p>").text("Rating: " + rating);
 
                     // Creating an image tag
-                    var personImage = $("<img>");
+                    var movieImage = $("<img>");
 
                     // Giving the image tag an src attribute of a proprty pulled off the
                     // result item
-                    personImage.attr("src", results[i].images.fixed_height.url);
+                    movieImage.attr("src", results[i].images.fixed_height.url);
 
                     // Appending the paragraph and personImage we created to the "gifDiv" div we created
                     gifDiv.append(p);
-                    gifDiv.append(personImage);
+                    gifDiv.append(movieImage);
+                    gifDiv.text(movieArray[i]);
 
                     // Prepending the gifDiv to the "#gifs-appear-here" div in the HTML
                     $("#gifs-appear-here").prepend(gifDiv);
                 }
             }
+            function renderButtons() {
+
+                // Deleting the movie buttons prior to adding new movie buttons
+                // (this is necessary otherwise we will have repeat buttons)
+                $("#buttons-view").empty();
+
+                // Looping through the array of movies
+                for (var i = 0; i < movies.length; i++) {
+
+                    // Then dynamicaly generating buttons for each movie in the array.
+                    // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+                    var a = $("<button>");
+                    // Adding a class
+                    a.addClass("movie");
+                    // Adding a data-attribute with a value of the movie at index i
+                    a.attr("data-name", movieArray[i]);
+                    // Providing the button's text with a value of the movie at index i
+                    a.text(movieArray[i]);
+                    // Adding the button to the HTML
+                    $("#buttons-view").append(a);
+                }
+            }
         });
 });
+
+function renderButtons() {
+
+    // Deleting the movie buttons prior to adding new movie buttons
+    // (this is necessary otherwise we will have repeat buttons)
+    $("#buttons-view").empty();
+
+    // Looping through the array of movies
+    for (var i = 0; i < movieArray.length; i++) {
+
+        // Then dynamicaly generating buttons for each movie in the array.
+        // This code $("<button>") is all jQuery needs to create the start and end tag. (<button></button>)
+        var a = $("<button>");
+        // Adding a class
+        a.addClass("movie");
+        // Adding a data-attribute with a value of the movie at index i
+        a.attr("data-name", movieArray[i]);
+        // Providing the button's text with a value of the movie at index i
+        a.text(movieArray[i]);
+        // Adding the button to the HTML
+        $("#buttons-view").append(a);
+    }
+}
 
 $(".gif").on("click", function () {
     // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
@@ -65,3 +113,4 @@ $(".gif").on("click", function () {
         $(this).attr("data-state", "still");
     }
 });
+
